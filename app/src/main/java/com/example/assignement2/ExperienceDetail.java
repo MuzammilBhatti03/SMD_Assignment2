@@ -35,6 +35,10 @@ public class ExperienceDetail extends AppCompatActivity {
     }
 
     public void init(){
+        ETcompanyname=findViewById(R.id.ETcompanyname);
+        ETRole=findViewById(R.id.ETrolename);
+        ETstartdate=findViewById(R.id.ETstart_date);
+        Etenddate=findViewById(R.id.ETend_date);
     }
 
 }
