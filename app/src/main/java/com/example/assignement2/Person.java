@@ -12,6 +12,8 @@ public class Person implements Serializable {
     String Summary;
     List<Education> educationList=new ArrayList<>();
     List<Experience> experienceList=new ArrayList<>();
+    List<Reference> referenceList =new ArrayList<>();
+    List<Certification> certificationList = new ArrayList<>();
 
     public List<Experience> getExperienceList() {
         return experienceList;
@@ -93,6 +95,33 @@ public class Person implements Serializable {
     public void Addexperience(List<Experience> experienceList){
         for(int i=0; i<experienceList.size();i++){
             this.experienceList.add(experienceList.get(i));
+        }
+    }
+
+    public List<Reference> getReferenceList() {
+        return referenceList;
+    }
+
+    public void setReferenceList(List<Reference> referenceList) {
+        this.referenceList = referenceList;
+    }
+
+    public List<Certification> getCertificationList() {
+        return certificationList;
+    }
+
+    public void setCertificationList(List<Certification> certificationList) {
+        this.certificationList = certificationList;
+    }
+
+    public void Addreference(List<Reference> referenceList){
+        for(int i=0; i<referenceList.size();i++){
+            this.referenceList.add(referenceList.get(i));
+        }
+    }
+    public void Addcertification(List<Certification> certificationList){
+        for(int i=0; i<certificationList.size();i++){
+            this.certificationList.add(certificationList.get(i));
         }
     }
 }

@@ -74,6 +74,20 @@ init();
             }
         }
     });
+    private ActivityResultLauncher<Intent> ExperienceLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        List<Experience> experienceList = (List<Experience>) data.getSerializableExtra("experienceDetail");
+                        if (experienceList == null) {
+                            experienceList = new ArrayList<>();
+                        }
+                        person.Addexperience(experienceList);
+                    }
+                }
+            }
+    );
 
     private void init(){
         // Add more click listeners as needed...
@@ -132,6 +146,12 @@ init();
             Intent intent = new Intent(this, EducationDetail.class);
             EducationLaunher.launch(intent);
         });
+
+        experienceFrag.setButtonClickListener(v->{
+            Intent intent = new Intent(this, ExperienceDetail.class);
+            ExperienceLauncher.launch(intent);
+        });
+
     }
 
 }

@@ -7,8 +7,16 @@
     android:layout_height="match_parent"
     android:backgroundTint="#104F9B"
     android:background="#5856d6"
+    android:orientation="vertical"
     tools:context=".ExperienceDetail">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TVresult"
+        android:text="Enter Your Experience Details"
+        android:textColor="#008000"
+        android:layout_marginHorizontal="20dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -21,34 +29,14 @@
         app:boxCornerRadiusTopStart="15dp"
         app:boxCornerRadiusBottomEnd="15dp"
         app:boxCornerRadiusBottomStart="15dp">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingVertical="2dp"
             android:id="@+id/ETcompanyname"
             android:hint="Enter Company name"
-            android:inputType="text"
-            />
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/white"
-            app:boxBackgroundMode="outline"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingVertical="2dp"
-                android:id="@+id/ETrolename"
-                android:hint="Role or Responsiblities"
-                android:inputType="text"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -62,6 +50,28 @@
         app:boxCornerRadiusTopStart="15dp"
         app:boxCornerRadiusBottomEnd="15dp"
         app:boxCornerRadiusBottomStart="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingVertical="2dp"
+            android:id="@+id/ETrolename"
+            android:hint="Role or Responsibilities"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/white"
+        app:boxBackgroundMode="outline"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -69,8 +79,7 @@
             android:id="@+id/ETstart_date"
             android:hint="Start Date"
             android:focusable="false"
-            android:clickable="true"
-            />
+            android:clickable="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -84,6 +93,7 @@
         app:boxCornerRadiusTopStart="15dp"
         app:boxCornerRadiusBottomEnd="15dp"
         app:boxCornerRadiusBottomStart="15dp">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -91,41 +101,41 @@
             android:id="@+id/ETend_date"
             android:hint="End Date"
             android:focusable="false"
-            android:clickable="true"
-            />
+            android:clickable="true" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_button"
         class="com.example.assignement2.ButtonFrag"
-        android:id="@+id/Addbtn"
-        />
+        android:id="@+id/Addbtn" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:layout_marginBottom="50dp"
         tools:ignore="MissingClass">
+
         <fragment
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_button"
             class="com.example.assignement2.ButtonFrag"
-            android:id="@+id/Savefrag"
-            />
+            android:id="@+id/Savefrag" />
+
         <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_button"
             class="com.example.assignement2.ButtonFrag"
-            android:id="@+id/Cancelfrag"
-            />
+            android:id="@+id/Cancelfrag" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
