@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="abc_gmail_com">abc@gmail.com</string>
+    <string name="enter_number">Enter number</string>
+    <string name="enter_your_summary">Enter Your Summary</string>
+    <string name="enter_degree">Enter Degree</string>
+    <string name="degree_s_are">Degree\'s are:</string>
+</resources>
