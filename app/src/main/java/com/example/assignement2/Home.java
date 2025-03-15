@@ -89,6 +89,36 @@ init();
             }
     );
 
+    private ActivityResultLauncher<Intent> CertificationLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        List<Certification> certificationList = (List<Certification>) data.getSerializableExtra("certificationDetail");
+                        if (certificationList == null) {
+                            certificationList = new ArrayList<>();
+                        }
+                        person.Addcertification(certificationList);
+                    }
+                }
+            }
+    );
+    private ActivityResultLauncher<Intent> ReferenceLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        List<Reference> referenceList = (List<Reference>) data.getSerializableExtra("referenceDetail");
+                        if (referenceList == null) {
+                            referenceList = new ArrayList<>();
+                        }
+                        person.Addreference(referenceList);
+                    }
+                }
+            }
+    );
+
+
     private void init(){
         // Add more click listeners as needed...
 
@@ -152,6 +182,14 @@ init();
             ExperienceLauncher.launch(intent);
         });
 
+        referencesFrag.setButtonClickListener(v->{
+            Intent intent = new Intent(this, ReferenceDetail.class);
+            ExperienceLauncher.launch(intent);
+        });
+        certificationFrag.setButtonClickListener(v->{
+            Intent intent = new Intent(this, CertificationDetail.class);
+            ExperienceLauncher.launch(intent);
+        });
     }
 
 }

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Assignement2"
         tools:targetApi="31">
         <activity
+            android:name=".CertificationDetail"
+            android:exported="false" />
+        <activity
+            android:name=".ReferenceDetail"
+            android:exported="false" />
+        <activity
             android:name=".ExperienceDetail"
             android:exported="false" />
         <activity
