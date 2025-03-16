@@ -137,6 +137,9 @@ public class EducationDetail extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+
+
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) -> {
             String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
             editText.setText(date);
