@@ -10,6 +10,16 @@ public class Person implements Serializable {
     String phone;
     String gender;
     String Summary;
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
+    String imageSrc;
     List<Education> educationList=new ArrayList<>();
     List<Experience> experienceList=new ArrayList<>();
     List<Reference> referenceList =new ArrayList<>();

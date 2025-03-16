@@ -74,7 +74,7 @@ public class ExperienceDetail extends AppCompatActivity {
 
                 if (!companyName.isEmpty() && !roleName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()) {
                     // Convert dates to LocalDate for validation
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
                     LocalDate startLocalDate;
                     LocalDate endLocalDate;
                     LocalDate today = LocalDate.now();

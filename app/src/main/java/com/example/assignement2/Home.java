@@ -1,12 +1,18 @@
 package com.example.assignement2;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +124,15 @@ init();
                 }
             }
     );
-
+    private ActivityResultLauncher<Intent> profilePicLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    String imageUri = result.getData().getStringExtra("imageUri");
+                    if (imageUri != null) {
+                        person.setImageSrc(imageUri);
+                    }
+                }
+            });
 
     private void init(){
         // Add more click listeners as needed...
@@ -133,6 +148,8 @@ init();
         fragmentTransaction.show(fragmentManager.findFragmentById(R.id.ExperienceFrag));
         fragmentTransaction.show(fragmentManager.findFragmentById(R.id.CertificationFrag));
         fragmentTransaction.show(fragmentManager.findFragmentById(R.id.ReferencesFrag));
+        fragmentTransaction.show(fragmentManager.findFragmentById(R.id.CVpreviewFrag));
+        fragmentTransaction.show(fragmentManager.findFragmentById(R.id.DiscarddataFrag));
 
         fragmentTransaction.commit();
         ButtonFrag profilePicFrag = (ButtonFrag) fragmentManager.findFragmentById(R.id.ProfilePicFrag);
@@ -142,6 +159,8 @@ init();
         ButtonFrag experienceFrag = (ButtonFrag) fragmentManager.findFragmentById(R.id.ExperienceFrag);
         ButtonFrag certificationFrag = (ButtonFrag) fragmentManager.findFragmentById(R.id.CertificationFrag);
         ButtonFrag referencesFrag = (ButtonFrag) fragmentManager.findFragmentById(R.id.ReferencesFrag);
+        ButtonFrag previewFrag = (ButtonFrag) fragmentManager.findFragmentById(R.id.CVpreviewFrag);
+        ButtonFrag discardDataFrag = (ButtonFrag) fragmentManager.findFragmentById(R.id.DiscarddataFrag);
 
         // Set button text for each fragment
         if(profilePicFrag!=null){
@@ -153,15 +172,16 @@ init();
         experienceFrag.setButtonText("Experience");
         certificationFrag.setButtonText("Certifications");
         referencesFrag.setButtonText("References");
+        previewFrag.setButtonText("Preview Data");
+        discardDataFrag.setButtonText("Discard Data");
 
+        discardDataFrag.setconfiguration(-2,-1, "#8B0000","#FFFFFF",50);
         // Set click listeners for each fragment
         profilePicFrag.setButtonClickListener(v -> {
-            // Handle Profile Picture button click
             Intent intent = new Intent(Home.this, ProfilePicture.class);
-            Toast.makeText(this,"clicked on profile btn ",Toast.LENGTH_LONG).show();
-            startActivity(intent);
+            Toast.makeText(this, "Clicked on profile button", Toast.LENGTH_LONG).show();
+            profilePicLauncher.launch(intent);
         });
-
         personalDetailFrag.setButtonClickListener(v -> {
             Intent intent = new Intent(Home.this, PersonalDetail.class);
             personalDetailLauncher.launch(intent);
@@ -184,12 +204,37 @@ init();
 
         referencesFrag.setButtonClickListener(v->{
             Intent intent = new Intent(this, ReferenceDetail.class);
-            ExperienceLauncher.launch(intent);
+            ReferenceLauncher.launch(intent);
         });
         certificationFrag.setButtonClickListener(v->{
             Intent intent = new Intent(this, CertificationDetail.class);
-            ExperienceLauncher.launch(intent);
+            CertificationLauncher.launch(intent);
         });
+
+        previewFrag.setButtonClickListener(v->{
+            Intent intent = new Intent(this,PreviewDataActivity.class);
+            intent.putExtra("Person",(Serializable) person);
+            startActivity(intent);
+            onPause();
+        });
+        discardDataFrag.setButtonClickListener(v -> {
+            // Show a confirmation dialog
+            new AlertDialog.Builder(this)
+                    .setTitle("Discard Data") // Dialog title
+                    .setMessage("Are you sure you want to discard all data?") // Dialog message
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User confirmed, reset the person object
+                        person = new Person();
+                        Toast.makeText(this, "All data discarded", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User canceled, do nothing
+                        dialog.dismiss();
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert) // Optional: Set an icon
+                    .show(); // Show the dialog
+        });
+
     }
 
 }

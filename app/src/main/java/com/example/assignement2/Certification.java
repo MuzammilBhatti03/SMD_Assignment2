@@ -4,13 +4,11 @@ public class Certification {
     private String title;
     private String issuingOrganization;
     private String issueDate;
-    private String expirationDate;
 
-    public Certification(String title, String issuingOrganization, String issueDate, String expirationDate) {
+    public Certification(String title, String issuingOrganization, String issueDate) {
         this.title = title;
         this.issuingOrganization = issuingOrganization;
         this.issueDate = issueDate;
-        this.expirationDate = expirationDate;
     }
 
     public String getTitle() {
@@ -37,11 +35,4 @@ public class Certification {
         this.issueDate = issueDate;
     }
 
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
 }

@@ -59,6 +59,20 @@
         class="com.example.assignement2.ButtonFrag"
         android:id="@+id/ReferencesFrag"
 />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_button"
+        class="com.example.assignement2.ButtonFrag"
+        android:id="@+id/CVpreviewFrag"
+/>
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_button"
+        class="com.example.assignement2.ButtonFrag"
+        android:id="@+id/DiscarddataFrag"
+/>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
