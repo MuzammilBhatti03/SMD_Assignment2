@@ -70,7 +70,7 @@ public class CertificationDetail extends AppCompatActivity {
 
                 if (!certficateTitle.isEmpty() && !issueOrg.isEmpty() && !issueDate.isEmpty()) {
                     if(!isValidStartDate(issueDate)){
-                        Toast.makeText(this,"Date can't be greater than today",Toast.LENGTH_SHORT);
+                        Toast.makeText(this,"Date can't be greater than today",Toast.LENGTH_SHORT).show();
                         ETissueDate.setError("Enter correct date");
                         return;
                     }
@@ -124,20 +124,21 @@ public class CertificationDetail extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) -> {
-            String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+            String date = String.format("%02d-%02d-%04d", selectedDay, (selectedMonth + 1), selectedYear);
             editText.setText(date);
         }, year, month, day);
         datePickerDialog.show();
     }
     public boolean isValidStartDate(String startDate) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             sdf.setLenient(false);
             Date enteredDate = sdf.parse(startDate);
             Date currentDate = new Date();
 
             return !enteredDate.after(currentDate);
         } catch (Exception e) {
+            Toast.makeText(this, "Invalid date format. Use dd-MM-yyyy", Toast.LENGTH_SHORT).show();
             return false;
         }
     }

@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/cv_maker_splash_logo"
         android:layout_gravity="center"
+        android:id="@+id/logo"
         />
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,6 +1,8 @@
 package com.example.assignement2;
 
-public class Reference {
+import java.io.Serializable;
+
+public class Reference implements Serializable {
     private String name;
     private String contact;
     private String relation;

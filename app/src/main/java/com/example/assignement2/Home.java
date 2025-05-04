@@ -135,7 +135,6 @@ init();
             });
 
     private void init(){
-        // Add more click listeners as needed...
 
         // Add fragments to the layout
         FragmentManager fragmentManager = getSupportFragmentManager();

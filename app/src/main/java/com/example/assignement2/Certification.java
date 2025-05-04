@@ -1,6 +1,8 @@
 package com.example.assignement2;
 
-public class Certification {
+import java.io.Serializable;
+
+public class Certification implements Serializable {
     private String title;
     private String issuingOrganization;
     private String issueDate;

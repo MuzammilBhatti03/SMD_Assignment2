@@ -74,7 +74,7 @@ public class ExperienceDetail extends AppCompatActivity {
 
                 if (!companyName.isEmpty() && !roleName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()) {
                     // Convert dates to LocalDate for validation
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                     LocalDate startLocalDate;
                     LocalDate endLocalDate;
                     LocalDate today = LocalDate.now();
@@ -147,7 +147,7 @@ public class ExperienceDetail extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) -> {
-            String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+            String date = String.format("%02d-%02d-%04d", selectedDay, (selectedMonth + 1), selectedYear);
             editText.setText(date);
         }, year, month, day);
         datePickerDialog.show();

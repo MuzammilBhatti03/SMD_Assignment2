@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,13 +14,14 @@ public class PreviewDataActivity extends AppCompatActivity {
     private TextView nameTextView, emailTextView, phoneTextView;
     private TextView summaryTextView, educationTextView, experienceTextView, referenceTextView, TVcertificates;
     private ImageFilterView profileImageView;
+    private Button shareBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_data);
 
-        // Initialize views]
+        // Initialize views
         nameTextView = findViewById(R.id.name);
         emailTextView = findViewById(R.id.email);
         phoneTextView = findViewById(R.id.phone);
@@ -29,6 +31,7 @@ public class PreviewDataActivity extends AppCompatActivity {
         referenceTextView = findViewById(R.id.references);
         profileImageView = findViewById(R.id.profile_Pic);
         TVcertificates = findViewById(R.id.certifications);
+        shareBtn = findViewById(R.id.sharebtn);
         // Get data from Intent
         Intent intent = getIntent();
         Person person = (Person) intent.getSerializableExtra("Person");
@@ -37,10 +40,12 @@ public class PreviewDataActivity extends AppCompatActivity {
             nameTextView.setText(person.getName() != null ? person.getName() : "NA");
             emailTextView.setText(person.getEmail() != null ? person.getEmail() : "NA");
             phoneTextView.setText(person.getPhone() != null ? person.getPhone() : "NA");
-            summaryTextView.setText(person.getSummary() != null ? person.getSummary() : "NA");if (person.getImageSrc() != null && !person.getImageSrc().isEmpty()) {
+            summaryTextView.setText(person.getSummary() != null ? person.getSummary() : "NA");
+
+            if (person.getImageSrc() != null && !person.getImageSrc().isEmpty()) {
                 try {
                     Uri uri = Uri.parse(person.getImageSrc());
-                    Toast.makeText(this,"uri is "+uri,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "uri is " + uri, Toast.LENGTH_SHORT).show();
                     if (profileImageView != null) {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                         profileImageView.setImageBitmap(bitmap);
@@ -55,36 +60,58 @@ public class PreviewDataActivity extends AppCompatActivity {
                 Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
             }
 
+            // Set education list
             if (!person.getEducationList().isEmpty()) {
-                for(int i=0;i<person.educationList.size();i++){
-                    educationTextView.setText(person.getEducationList().get(i).getDegree() + " - " +
-                            person.getEducationList().get(i).getInstitution());
+                StringBuilder educationText = new StringBuilder();
+                for (int i = 0; i < person.getEducationList().size(); i++) {
+                    educationText.append(person.getEducationList().get(i).getDegree())
+                            .append(" - ")
+                            .append(person.getEducationList().get(i).getInstitution())
+                            .append("\n");
                 }
+                educationTextView.setText(educationText.toString());
             } else {
                 educationTextView.setText("NA");
             }
+
+            // Set certification list
             if (!person.getCertificationList().isEmpty()) {
-                for(int i=0;i<person.certificationList.size();i++){
-                    educationTextView.setText(person.getCertificationList().get(i).getTitle() + " - " +
-                            person.getCertificationList().get(i).getIssuingOrganization());
+                StringBuilder certificationText = new StringBuilder();
+                for (int i = 0; i < person.getCertificationList().size(); i++) {
+                    certificationText.append(person.getCertificationList().get(i).getTitle())
+                            .append(" - ")
+                            .append(person.getCertificationList().get(i).getIssuingOrganization())
+                            .append("\n");
                 }
+                TVcertificates.setText(certificationText.toString());
             } else {
-                educationTextView.setText("NA");
+                TVcertificates.setText("NA");
             }
+
+            // Set experience list
             if (!person.getExperienceList().isEmpty()) {
-                for(int i=0;i<person.experienceList.size();i++){
-                    experienceTextView.setText(person.getExperienceList().get(i).getCompanyName() + " - " +
-                            person.getExperienceList().get(i).getStartDate());
+                StringBuilder experienceText = new StringBuilder();
+                for (int i = 0; i < person.getExperienceList().size(); i++) {
+                    experienceText.append(person.getExperienceList().get(i).getCompanyName())
+                            .append(" - ")
+                            .append(person.getExperienceList().get(i).getStartDate())
+                            .append("\n");
                 }
+                experienceTextView.setText(experienceText.toString());
             } else {
                 experienceTextView.setText("NA");
             }
 
+            // Set reference list
             if (!person.getReferenceList().isEmpty()) {
-                for(int i=0;i<person.referenceList.size();i++){
-                    referenceTextView.setText(person.getReferenceList().get(i).getName()+"\ncontact: "+
-                            person.getReferenceList().get(i).getContact());
+                StringBuilder referenceText = new StringBuilder();
+                for (int i = 0; i < person.getReferenceList().size(); i++) {
+                    referenceText.append(person.getReferenceList().get(i).getName())
+                            .append("\ncontact: ")
+                            .append(person.getReferenceList().get(i).getContact())
+                            .append("\n");
                 }
+                referenceTextView.setText(referenceText.toString());
             } else {
                 referenceTextView.setText("NA");
             }
@@ -96,6 +123,27 @@ public class PreviewDataActivity extends AppCompatActivity {
             educationTextView.setText("NA");
             experienceTextView.setText("NA");
             referenceTextView.setText("NA");
+            TVcertificates.setText("NA");
         }
+
+        shareBtn.setOnClickListener(v -> {
+            StringBuilder shareContent = new StringBuilder();
+
+            shareContent.append("Name: ").append(nameTextView.getText().toString()).append("\n")
+                    .append("Email: ").append(emailTextView.getText().toString()).append("\n")
+                    .append("Phone: ").append(phoneTextView.getText().toString()).append("\n\n")
+                    .append("Summary: ").append(summaryTextView.getText().toString()).append("\n\n")
+                    .append("Education:\n").append(educationTextView.getText().toString()).append("\n\n")
+                    .append("Experience:\n").append(experienceTextView.getText().toString()).append("\n\n")
+                    .append("Certifications:\n").append(TVcertificates.getText().toString()).append("\n\n")
+                    .append("References:\n").append(referenceTextView.getText().toString()).append("\n");
+
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Profile Details");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent.toString());
+
+            startActivity(Intent.createChooser(shareIntent, "Share via"));
+        });
     }
 }

@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:background="@android:color/white">
 
@@ -17,8 +18,8 @@
             android:id="@+id/profile_Pic"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/cv_maker_splash_logo"
-            android:layout_gravity="center"
+            android:src="@drawable/ic_prof_image"
+            app:roundPercent="1"
             />
 
         <!-- Name -->
@@ -141,5 +142,13 @@
             android:layout_marginBottom="10dp"
             android:padding="8dp"
             android:background="#cde3f1"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Data"
+            android:paddingVertical="20dp"
+            android:id="@+id/sharebtn"/>
+
     </LinearLayout>
 </ScrollView>
